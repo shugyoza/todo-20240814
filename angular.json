@@ -51,13 +51,33 @@
               ],
               "outputHashing": "all"
             },
+            "uat": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uat.ts"
+                }
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -68,8 +88,14 @@
             "production": {
               "buildTarget": "todo:build:production"
             },
+            "uat": {
+              "buildTarget": "todo:build:uat"
+            },
             "development": {
               "buildTarget": "todo:build:development"
+            },
+            "local": {
+              "buildTarget": "todo:build:local"
             }
           },
           "defaultConfiguration": "development"
