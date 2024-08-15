@@ -10,6 +10,6 @@ export const environment = {
     api: {
       root: `http://localhost:${port}/local`,
       path: path.api,
-    }
-  }
+    },
+  },
 };

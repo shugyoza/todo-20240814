@@ -9,6 +9,6 @@ export const environment = {
     api: {
       root: `https://${env}.root.url/api`,
       path: path.api,
-    }
-  }
+    },
+  },
 };
