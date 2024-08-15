@@ -61,6 +61,8 @@ jobs:
           VALIDATE_POWERSHELL: false # error on .sh, i.e.: 'error  Parsing error: Unexpected token :'
           VALIDATE_SHELL_SHFMT: false # err on .sh, strict non-sense as there is no hint about what is wrong.
           VALIDATE_JSON: false # err on .json, i.e.: 'error  Parsing error: Unexpected token :'
+          IGNORE_GENERATED_FILES: true
+          IGNORE_GITIGNORED_FILES: true
       # - run: npm run build --if-present
 
       - name: Running unit tests
