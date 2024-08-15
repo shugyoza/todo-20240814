@@ -12,7 +12,7 @@
     "build:uat": "ng build --configuration uat",
     "build:dev": "ng build --configuration development",
     "lint": "ng lint",
-    "ci:test": "npx ng test --project not-crm --no-watch --no-progress --code-coverage --browsers=ChromeHeadless"
+    "ci:test": "npx ng test --project todo --no-watch --no-progress --code-coverage --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
