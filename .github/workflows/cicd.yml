@@ -15,7 +15,6 @@ env:
 
 jobs:
   # 'This' workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-  # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
   ci-initialization:
     runs-on: ubuntu-latest
 
@@ -41,9 +40,6 @@ jobs:
 
       # This workflow executes several linters on changed files based on languages used in your code base whenever
       # you push a code or open a pull request.
-
-      # Adjust the behavior by modifying env vars, list see: https://github.com/super-linter/super-linter
-      # or add customized files in .github/linters/ directory, list see: https://github.com/github/super-linter/blob/main/TEMPLATES/
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
@@ -97,4 +93,3 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/private
-          
