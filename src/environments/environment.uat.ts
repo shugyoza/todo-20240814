@@ -8,7 +8,7 @@ export const environment = {
   url: {
     api: {
       root: `https://${env}.root.url/api`,
-      path: path.api
-    }
-  }
+      path: path.api,
+    },
+  },
 };

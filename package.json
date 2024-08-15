@@ -11,7 +11,8 @@
     "build:prod": "ng build --configuration production",
     "build:uat": "ng build --configuration uat",
     "build:dev": "ng build --configuration development",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "ci:test": "npx ng test --project todo --no-watch --no-progress --code-coverage --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@types/jasmine": "~4.3.0",
     "angular-eslint": "18.3.0",
     "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
