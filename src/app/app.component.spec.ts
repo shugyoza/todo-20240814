@@ -8,7 +8,7 @@ describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [provideHttpClient()],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
   );
 
