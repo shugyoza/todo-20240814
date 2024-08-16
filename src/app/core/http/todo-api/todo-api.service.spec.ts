@@ -22,7 +22,7 @@ describe('TodoApiService', () => {
   });
 
   it('should call http.post() when .create() is being called', () => {
-    const body = {} as any;
+    const body = {};
     const { root, path } = environment.url.api;
     const url = root + path.mock;
     const options = {
@@ -53,7 +53,7 @@ describe('TodoApiService', () => {
   });
 
   it('should call http.put() when update.put() is being called', () => {
-    const body = {} as any;
+    const body = {};
     const { root, path } = environment.url.api;
     const url = root + path.mock;
     const options = {
@@ -69,7 +69,7 @@ describe('TodoApiService', () => {
   });
 
   it('should call http.put() when update.patch() is being called', () => {
-    const body = {} as any;
+    const body = {};
     const { root, path } = environment.url.api;
     const url = root + path.mock;
     const options = {

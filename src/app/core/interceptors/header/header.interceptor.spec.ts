@@ -20,6 +20,7 @@ import { takeLast } from 'rxjs';
 describe('headerInterceptor', () => {
   let httpTestingController: HttpTestingController;
   let httpClient: HttpClient;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let cookieService: CookieService;
 
   const interceptor: HttpInterceptorFn = (
