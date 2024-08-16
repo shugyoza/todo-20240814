@@ -7,9 +7,7 @@ import { inject, Injectable } from '@angular/core';
 export class CookieService {
   private document = inject(DOCUMENT);
 
-  public update(update: {
-    [key: string]: (string | number)[] | number | string;
-  }): void {
+  public update<T>(update: Record<string, T>): void {
     const cookie = { ...this.parse(), ...update };
 
     for (const key in cookie) {
@@ -27,10 +25,10 @@ export class CookieService {
     }
   }
 
-  public parse(): { [key: string]: string } {
+  public parse(): Record<string, string> {
     const cookie = {
       array: this.document.cookie?.split(';'),
-      object: {} as { [key: string]: string },
+      object: {} as Record<string, string>,
     };
     cookie.array?.forEach((keyValue: string) => {
       const [key, value] = keyValue.split('=').map((text) => text.trim());
