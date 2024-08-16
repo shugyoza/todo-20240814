@@ -59,6 +59,7 @@ jobs:
           VALIDATE_JSON: false # err on .json, i.e.: 'error  Parsing error: Unexpected token :'
           IGNORE_GENERATED_FILES: true
           IGNORE_GITIGNORED_FILES: true
+          FILTER_REGEX_EXCLUDE: .*http/.* # exclude files inside http/ folder to avoid api calls error
       # - run: npm run build --if-present
 
       - name: Running unit tests
