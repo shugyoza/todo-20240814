@@ -38,7 +38,6 @@ describe('LayoutPipe', () => {
   });
 
   it('should do something', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     spyOn(pipe['_breakpointObserver$'], 'observe').and.callFake(
       (
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
