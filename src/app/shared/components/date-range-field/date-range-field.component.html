@@ -1,0 +1,71 @@
+<mat-form-field
+  [style.width]="''"
+  [formGroup]="dateRangeField"
+  appearance="outline"
+  [ngClass]="{ 'error-border': customErrorMessage }"
+>
+  <mat-label [ngClass]="{ 'error-text': customErrorMessage }">
+    {{ label }}
+  </mat-label>
+
+  <mat-date-range-input
+    [style.width]="'100%'"
+    [formGroup]="dateRangeField"
+    [required]="isRequired"
+    [rangePicker]="dp"
+    [max]="maxOneYearFromNow"
+    [min]="earliestQueriedReportDate"
+  >
+    <input
+      [style.width]="'100%'"
+      matStartDate
+      #startDateInput
+      formControlName="start"
+      [attr.aria-label]="label"
+      placeholder="From (mm/yyyy)"
+      (dateChange)="onDateChange(startDateInput, 'start')"
+    />
+
+    <input
+      [style.width]="'100%'"
+      matEndDate
+      #endDateInput
+      formControlName="end"
+      placeholder="To (mm/yyyy)"
+      [attr.aria-label]="label"
+      [max]="maxOneYearFromNow"
+      [min]="earliestQueriedReportDate"
+      (dateChange)="onDateChange(endDateInput, 'end')"
+    />
+  </mat-date-range-input>
+
+  <mat-datepicker-toggle matIconSuffix [for]="dp"> </mat-datepicker-toggle>
+
+  <mat-date-range-picker
+    #dp
+    startView="multi-year"
+    (monthSelected)="setMonthAndYear($event, dp)"
+    panelClass="example-month-picker"
+  >
+  </mat-date-range-picker>
+
+  @if (
+    (dateRangeField.controls['start'].errors &&
+      dateRangeField.controls['start'].errors['required']) ||
+    (dateRangeField.controls['end'].errors &&
+      dateRangeField.controls['end'].errors['required'])
+  ) {
+    <mat-error> {{ label }} is required. </mat-error>
+  } @else if (
+    dateRangeField.controls['start'].errors ||
+    dateRangeField.controls['end'].errors
+  ) {
+    <mat-error> Invalid date(s) </mat-error>
+  }
+
+  @if (customErrorMessage) {
+    <mat-hint [ngClass]="{ 'error-text': customErrorMessage }">
+      {{ customErrorMessage }}
+    </mat-hint>
+  }
+</mat-form-field>
