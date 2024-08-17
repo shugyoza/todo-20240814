@@ -67,7 +67,7 @@ jobs:
         run: npm run lint
 
       - name: Running unit tests
-        run: npm run ci:test
+        run: npm run test
 
   docker:
     needs: ci-initialization
