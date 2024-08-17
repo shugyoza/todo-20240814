@@ -225,7 +225,7 @@ export class DateRangeFieldComponent {
         start: this.getDate('start'),
         end: this.getDate('end'),
       },
-      errors: this.dateRangeField.get(controlName)?.errors,
+      errors: this.getDate(controlName)?.errors,
     };
 
     if (!input?.length) {
@@ -246,10 +246,10 @@ export class DateRangeFieldComponent {
     const [mm, yyyy] = input.split('/');
     this.setDate(controlName, new Date(+yyyy, +mm - 1));
 
-    const errors = this.dateRangeField.get('start')?.errors
-      ? this.dateRangeField.get('start')?.errors
-      : this.dateRangeField.get('end')?.errors
-        ? this.dateRangeField.get('end')?.errors
+    const errors = this.getDate('start')?.errors
+      ? this.getDate('start')?.errors
+      : this.getDate('end')?.errors
+        ? this.getDate('end')?.errors
         : null;
 
     customEvent = {
