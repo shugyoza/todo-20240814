@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration local",
+    "start:share": "ng serve --host 0.0.0.0 --disable-host-check",
     "lint": "ng lint && npx prettier . --check",
     "test": "npx ng test --project todo --no-watch --no-progress --code-coverage --browsers=ChromeHeadlessNoSandbox",
     "test:watch": "ng test --project todo --browsers=ChromeHeadlessNoSandbox --code-coverage --no-progress",
