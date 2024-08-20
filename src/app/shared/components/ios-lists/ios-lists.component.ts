@@ -4,16 +4,11 @@ import {
   Input,
   signal,
 } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { JsonPipe } from '@angular/common';
 
-import { ButtonToggleComponent } from 'src/app/shared/components/button-toggle/button-toggle.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
 import { IosList } from './ios-lists.interface';
 
 @Component({
@@ -22,17 +17,7 @@ import { IosList } from './ios-lists.interface';
   templateUrl: 'ios-lists.component.html',
   styleUrl: 'ios-lists.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    MatExpansionModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatListModule,
-    ButtonToggleComponent,
-    JsonPipe,
-    CdkDrag,
-  ],
+  imports: [MatIconModule, MatDividerModule, JsonPipe, CdkDrag],
 })
 export class IosListsComponent {
   @Input() lists: IosList[] = [];
