@@ -1,0 +1,64 @@
+<!-- mat-elevation-z0 to remove expansion panel border
+<mat-expansion-panel class="mat-elevation-z0"></mat-expansion-panel>
+ -->
+
+<ul>
+  @for (list of lists; track list.name) {
+    <li>
+      <button (click)="toggleExpand(list)">
+        <mat-icon class="blue icon-start">
+          {{ list.icon?.start }}
+        </mat-icon>
+        <span class="text">{{ list.name }}</span>
+        @if (list.expandable) {
+          <mat-icon class="blue icon-end" iconPositionEnd>
+            {{ list.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
+          </mat-icon>
+        }
+      </button>
+
+      @if (list.children?.length && list.expanded) {
+        <ul class="card">
+          @for (group of list.children; track group.name) {
+            <li>
+              <button>
+                @if (!dragged[$index] || dragged[$index] === 0) {
+                  <mat-icon class="blue icon-start" iconPositionStart>
+                    {{ group.icon?.start }}
+                  </mat-icon>
+                  <span class="text">{{ group.name }}</span>
+                  <span class="darkgray count">{{ group.count }}</span>
+                  <mat-icon class="darkgray icon-end" iconPositionEnd>
+                    {{
+                      (group.icon?.end ?? group.expanded)
+                        ? 'keyboard_arrow_down'
+                        : 'chevron_right'
+                    }}
+                  </mat-icon>
+                }
+
+                @if (dragged[$index] > 0) {
+                  <span>Mail</span>
+                  <span>Message</span>
+                  <span>icon</span>
+                  {{ group.name }} {{ dragged[$index] }}
+                }
+              </button>
+
+              @if (dragged[$index] < 0) {
+                <span>{{ group.count }}</span>
+                <span>></span>
+                <span>Edit</span>
+                <span>Trash</span>
+              }
+            </li>
+
+            @if (list.children && $index < list.children.length - 1) {
+              <mat-divider></mat-divider>
+            }
+          }
+        </ul>
+      }
+    </li>
+  }
+</ul>

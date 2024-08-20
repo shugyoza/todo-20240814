@@ -1,0 +1,36 @@
+button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+ul,
+li {
+  width: 100%;
+}
+
+.icon-start {
+  margin-left: 1rem;
+}
+
+.icon-end {
+  margin-right: 0.5rem;
+}
+
+.icon-start,
+.icon-end,
+.count {
+  flex-basis: 1;
+}
+
+.text {
+  flex-grow: 4;
+}
+
+ul.card {
+  border: 1px solid whitesmoke;
+  border-radius: 0.5rem;
+  background-color: white;
+}
