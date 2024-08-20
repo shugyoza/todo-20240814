@@ -9,7 +9,11 @@
         <mat-icon class="blue icon-start">
           {{ list.icon?.start }}
         </mat-icon>
-        <span class="text">{{ list.name }}</span>
+        @if ($index === 0) {
+          <h1 class="title">{{ list.name }}</h1>
+        } @else {
+          <span class="text">{{ list.name }}</span>
+        }
         @if (list.expandable) {
           <mat-icon class="blue icon-end" iconPositionEnd>
             {{ list.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
