@@ -26,14 +26,12 @@ export class IosListsComponent {
   public dragDistance = 100;
 
   public toggleExpand(card: IosList): void {
-    console.log('hit');
     if (!card.expandable) return;
 
     card.expanded = !card.expanded;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public onDrag(event: any, index: number) {
+  public onDrag(event: unknown, index: number) {
     console.log(event, index);
 
     /* TODO: revisit for swipe event. Current problem: cannot limit the swiped element display
