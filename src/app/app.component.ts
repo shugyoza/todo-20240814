@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LayoutPipe } from './shared/pipes/layout/layout.pipe';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { context } from './constants/layout.constants';
 
@@ -10,9 +10,9 @@ import { context } from './constants/layout.constants';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [RouterOutlet, LayoutPipe, AsyncPipe, JsonPipe],
+  imports: [RouterOutlet, LayoutPipe, AsyncPipe],
 })
 export class AppComponent {
-  title = 'todo';
-  context = context;
+  public title = 'todo';
+  public context = context;
 }

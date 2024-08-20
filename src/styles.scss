@@ -1,12 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use '../src/app/shared/styles/m3-theme.scss';
+
+@include mat.core();
+
+// reset style start
+ul,
+li {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  all: unset;
+}
+// reset style end
+
+html {
+  // Apply the light theme by default
+  @include mat.core-theme(m3-theme.$light-theme);
+  @include mat.button-theme(m3-theme.$light-theme);
+}
 
 html,
 body {
   height: 100%;
 }
 body {
+  background-color: whitesmoke;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  padding: 1rem;
+}
+
+.none {
+  display: none;
 }
 
 .XSmall {
@@ -27,4 +57,12 @@ body {
 
 .XLarge {
   color: blue;
+}
+
+.blue {
+  color: #1f75fe; // crayola blue
+}
+
+.darkgray {
+  color: darkgray;
 }
