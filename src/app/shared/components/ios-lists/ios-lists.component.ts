@@ -30,7 +30,7 @@ import { SidenavDrawerComponent } from '../sidenav-drawer/sidenav-drawer.compone
 export class IosListsComponent {
   @Input() lists: IosList[] = [];
 
-  readonly sidenavOpenState = output<any>();
+  readonly sidenavOpenState = output<unknown>();
 
   readonly panelOpenState = signal(false);
 

@@ -31,11 +31,13 @@ export class ContactsComponent {
 
   public lists: IosList[] = lists;
 
-  public openSidenav(event: any, position: 'start' | 'end') {
+  public openSidenav(event: unknown, position: 'start' | 'end') {
     switch (position) {
       case 'start':
+        console.log(event); // TODO: add logic to pass data to the next screen
         return this._sidenavDrawerService.toggle('start');
       default:
+        console.log(event); // TODO: add logic to pass data to the next screen
         return this._sidenavDrawerService.toggle('end');
     }
   }
