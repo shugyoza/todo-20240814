@@ -25,7 +25,7 @@
         <ul class="card">
           @for (group of list.children; track group.name) {
             <li>
-              <button>
+              <button (click)="sidenavOpenState.emit({ group, $event })">
                 @if (!dragged[$index] || dragged[$index] === 0) {
                   <mat-icon class="blue icon-start" iconPositionStart>
                     {{ group.icon?.start }}

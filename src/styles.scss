@@ -35,6 +35,10 @@ body {
   padding: 1rem;
 }
 
+button:focus {
+  background-color: gainsboro;
+}
+
 .none {
   display: none;
 }

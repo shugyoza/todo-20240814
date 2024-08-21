@@ -1,8 +1,22 @@
-<app-ios-header class="ios-header">
-  <button role="button" buttonLeft class="ios-header-left blue">Edit</button>
-  <button role="button" buttonRight class="ios-header-right blue">
-    Add List
-  </button>
-</app-ios-header>
+<app-sidenav-drawer
+  [mode]="'side'"
+  [positionEnd]="true"
+  [hasBackdrop]="true"
+  [drawerWidthEnd]="'100%'"
+>
+  <ng-container sidenavContent>
+    <app-ios-header class="ios-header">
+      <button role="button" buttonLeft class="ios-header-left blue">
+        Edit
+      </button>
+      <button role="button" buttonRight class="ios-header-right blue">
+        Add List
+      </button>
+    </app-ios-header>
 
-<app-ios-lists [lists]="lists"> </app-ios-lists>
+    <app-ios-lists
+      [lists]="lists"
+      (sidenavOpenState)="openSidenav($event, 'end')"
+    ></app-ios-lists>
+  </ng-container>
+</app-sidenav-drawer>

@@ -1,0 +1,7 @@
+.drawer-container {
+  height: calc(100% - var(--window-header-height) - 10%);
+}
+
+.drawer-content {
+  overflow: hidden;
+}
