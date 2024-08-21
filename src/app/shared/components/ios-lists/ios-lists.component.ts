@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  output,
   signal,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +11,7 @@ import { JsonPipe } from '@angular/common';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { IosList } from './ios-lists.interface';
+import { SidenavDrawerComponent } from '../sidenav-drawer/sidenav-drawer.component';
 
 @Component({
   standalone: true,
@@ -17,12 +19,23 @@ import { IosList } from './ios-lists.interface';
   templateUrl: 'ios-lists.component.html',
   styleUrl: 'ios-lists.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatIconModule, MatDividerModule, JsonPipe, CdkDrag],
+  imports: [
+    MatIconModule,
+    MatDividerModule,
+    SidenavDrawerComponent,
+    JsonPipe,
+    CdkDrag,
+  ],
 })
 export class IosListsComponent {
   @Input() lists: IosList[] = [];
+
+  readonly sidenavOpenState = output<any>();
+
   readonly panelOpenState = signal(false);
+
   public dragged: Record<string, number> = {};
+
   public dragDistance = 100;
 
   public toggleExpand(card: IosList): void {
