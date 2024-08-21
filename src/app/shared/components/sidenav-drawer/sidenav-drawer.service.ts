@@ -18,21 +18,19 @@ export class SidenavDrawerService {
   }
 
   public open(position: 'start' | 'end'): Promise<MatDrawerToggleResult> {
-    switch (position) {
-      case 'start':
-        return this._startDrawer.open();
-      default:
-        return this._endDrawer.open();
+    if (position === 'start') {
+      return this._startDrawer.open();
     }
+
+    return this._endDrawer.open();
   }
 
   public close(position: 'start' | 'end'): Promise<MatDrawerToggleResult> {
-    switch (position) {
-      case 'start':
-        return this._startDrawer.close();
-      default:
-        return this._endDrawer.close();
+    if (position === 'start') {
+      return this._startDrawer.close();
     }
+
+    return this._endDrawer.close();
   }
 
   public toggle(position: 'start' | 'end'): Promise<MatDrawerToggleResult> {
@@ -40,16 +38,14 @@ export class SidenavDrawerService {
       return this._startDrawer.toggle();
     }
 
-    const result = this._endDrawer?.toggle();
-    return result;
+    return this._endDrawer.toggle();
   }
 
   public drawerIsOpened(position: 'start' | 'end'): boolean {
-    switch (position) {
-      case 'start':
-        return this._startDrawer.opened;
-      default:
-        return this._endDrawer.opened;
+    if (position === 'start') {
+      return this._startDrawer.opened;
     }
+
+    return this._endDrawer.opened;
   }
 }
