@@ -29,11 +29,12 @@ import { TouchDirective } from '@shared/directives/touch/touch.directive';
   ],
 })
 export class IosListsComponent implements OnChanges {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() lists: any[] = [];
 
   @Input() edit = false;
 
-  public readonly sidenavOpenState = output<any>();
+  public readonly sidenavOpenState = output<unknown>();
 
   public readonly panelOpenState = signal(false);
 
@@ -58,7 +59,6 @@ export class IosListsComponent implements OnChanges {
   }
 
   public onClick(event: MouseEvent): void {
-    console.log(event);
     const clear =
       !Object.keys(this.showStart).length &&
       !Object.keys(this.showEnd).length &&
@@ -103,8 +103,6 @@ export class IosListsComponent implements OnChanges {
 
       return;
     }
-
-    console.log(event, this.showEnd);
   }
 
   private reset(): void {
