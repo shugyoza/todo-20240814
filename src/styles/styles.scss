@@ -1,18 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
-@use '../src/app/shared/styles/m3-theme.scss';
+@use './m3-theme.scss';
+@use './light-theme.scss';
 
 @include mat.core();
 
 // reset style start
-ul,
-li {
-  list-style-type: none;
-  list-style-position: inside;
-  margin: 0;
-  padding: 0;
-}
-
 button {
   all: unset;
 }
@@ -24,10 +17,6 @@ html {
   @include mat.button-theme(m3-theme.$light-theme);
 }
 
-html,
-body {
-  height: 100%;
-}
 body {
   background-color: whitesmoke;
   margin: 0;
@@ -35,8 +24,19 @@ body {
   padding: 1rem;
 }
 
-button:focus {
-  background-color: gainsboro;
+button:focus,
+button:hover,
+button:disabled {
+  opacity: 0.8;
+}
+
+ul {
+  list-style-type: none; // remove bullet list
+  padding: 0; // remove the extra left padding/margin reserved for the list item
+}
+
+li {
+  line-height: 0; // remove the extra unwanted space at the bottom of li
 }
 
 .none {
