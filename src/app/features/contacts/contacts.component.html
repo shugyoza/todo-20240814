@@ -6,8 +6,12 @@
 >
   <ng-container sidenavContent>
     <app-ios-header class="ios-header">
-      <button role="button" buttonLeft class="ios-header-left blue">
-        Edit
+      <button
+        buttonLeft
+        class="ios-header-left blue"
+        (click)="edit.set(!edit())"
+      >
+        {{ edit() ? 'Done' : 'Edit' }}
       </button>
       <button role="button" buttonRight class="ios-header-right blue">
         Add List
@@ -15,8 +19,16 @@
     </app-ios-header>
 
     <app-ios-lists
+      class="card"
       [lists]="lists"
+      [edit]="edit()"
       (sidenavOpenState)="openSidenav($event, 'end')"
-    ></app-ios-lists>
+    >
+      <ng-container matIconStart> </ng-container>
+    </app-ios-lists>
+  </ng-container>
+
+  <ng-container endSidenavDrawer>
+    <button (click)="openSidenav($event, 'end')">Close</button>
   </ng-container>
 </app-sidenav-drawer>
