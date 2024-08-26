@@ -1,33 +1,37 @@
-<mat-sidenav-container class="drawer-container" [hasBackdrop]="hasBackdrop()">
+<mat-sidenav-container
+  class="drawer-container"
+  [hasBackdrop]="hasBackdrop()"
+  [style.height]="'100bh'"
+>
   @if (positionStart()) {
     <mat-sidenav
       #startDrawerRef
-      [style.width]="drawerWidthStart()"
+      [style.width]="drawerWidthStart"
       [mode]="mode()"
       position="start"
       role="region"
-      [opened]="opened().start"
-      [fixedInViewport]="true"
+      [opened]="openedStart"
+      [fixedInViewport]="fixedInViewportStart()"
     >
       <ng-content select="[startSidenavDrawer]"></ng-content>
-    </mat-sidenav>
-  }
-
-  @if (positionEnd()) {
-    <mat-sidenav
-      #endDrawerRef
-      [style.width]="drawerWidthEnd()"
-      [mode]="mode()"
-      position="end"
-      role="region"
-      [opened]="opened().end"
-      [fixedInViewport]="true"
-    >
-      <ng-content select="[endSidenavDrawer]"></ng-content>
     </mat-sidenav>
   }
 
   <mat-sidenav-content class="drawer-content">
     <ng-content select="[sidenavContent]"></ng-content>
   </mat-sidenav-content>
+
+  @if (positionEnd()) {
+    <mat-sidenav
+      #endDrawerRef
+      [style.width]="drawerWidthEnd"
+      [mode]="mode()"
+      position="end"
+      role="region"
+      [opened]="openedEnd"
+      [fixedInViewport]="fixedInViewportEnd()"
+    >
+      <ng-content select="[endSidenavDrawer]"></ng-content>
+    </mat-sidenav>
+  }
 </mat-sidenav-container>
