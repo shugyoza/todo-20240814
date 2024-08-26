@@ -37,8 +37,4 @@ export class IosButtonComponent {
   public readonly buttonTouch = output<ButtonEvent>();
 
   public readonly buttonDrag = output<ButtonEvent>();
-
-  public buttonEvents(event: unknown) {
-    console.log(event);
-  }
 }
