@@ -1,68 +1,175 @@
-<!-- mat-elevation-z0 to remove expansion panel border
-<mat-expansion-panel class="mat-elevation-z0"></mat-expansion-panel>
- -->
+<ul class="lists">
+  @for (list of lists; track $index) {
+    @let i = $index;
 
-<ul>
-  @for (list of lists; track list.name) {
-    <li>
-      <button (click)="toggleExpand(list)">
-        <mat-icon class="blue icon-start">
-          {{ list.icon?.start }}
-        </mat-icon>
-        @if ($index === 0) {
-          <h1 class="title">{{ list.name }}</h1>
+    <li class="list-title">
+      <app-ios-button
+        [list]="list"
+        [id]="'list-' + $index"
+        (click)="toggleExpand(list)"
+      >
+        @if ($index > 0) {
+          <h2 start2>{{ list.name }}</h2>
         } @else {
-          <span class="text">{{ list.name }}</span>
+          <h1 start2>{{ list.name }}</h1>
         }
-        @if (list.expandable) {
-          <mat-icon class="blue icon-end" iconPositionEnd>
-            {{ list.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
-          </mat-icon>
-        }
-      </button>
 
-      @if (list.children?.length && list.expanded) {
+        <ng-container end2>
+          @if (list.expanded) {
+            <img
+              alt=""
+              src="../../../../assets/icons/keyboard_arrow_down_24dp_4B77D1_FILL0_wght400_GRAD0_opsz24.svg"
+            />
+          } @else {
+            <img
+              alt=""
+              src="../../../../assets/icons/arrow_forward_ios_24dp_4B77D1_FILL0_wght400_GRAD0_opsz24.svg"
+            />
+          }
+        </ng-container>
+      </app-ios-button>
+
+      @if (list['children']?.length && list.expanded) {
         <ul class="card">
-          @for (group of list.children; track group.name) {
-            <li>
-              <button (click)="sidenavOpenState.emit({ group, $event })">
-                @if (!dragged[$index] || dragged[$index] === 0) {
-                  <mat-icon class="blue icon-start" iconPositionStart>
-                    {{ group.icon?.start }}
-                  </mat-icon>
-                  <span class="text">{{ group.name }}</span>
-                  <span class="darkgray count">{{ group.count }}</span>
-                  <mat-icon class="darkgray icon-end" iconPositionEnd>
-                    {{
-                      (group.icon?.end ?? group.expanded)
-                        ? 'keyboard_arrow_down'
-                        : 'chevron_right'
-                    }}
-                  </mat-icon>
+          @let buttons = list['children'] ?? [];
+
+          @for (button of buttons; track $index) {
+            @let j = $index;
+            @let key = 'button-' + i + '-' + j;
+            @let showEdit = edit && j !== 0;
+
+            <li
+              [style.border-bottom]="
+                $index < buttons.length - 1 ? '1px solid silver' : ''
+              "
+            >
+              <app-ios-button
+                [disabled]="j === 0 && showEdit"
+                (click)="onClick($event)"
+                appTouch="horizontal"
+                [index]="j"
+                (appTouchEvent)="onTouch($event, key, j)"
+              >
+                <!-- 
+                  hiddenStart section by default is hidden.
+                  no options for edit/emai/text available for root group: list at $index[0]
+                -->
+                @let hiddenStartWidth =
+                  j > 0 && showStart[key] ? showStart[key] : 0;
+                <span
+                  hiddenStart
+                  [ngStyle]="{
+                    width: showEdit ? 'fit-content' : hiddenStartWidth + 'px',
+                    display: 'flex',
+                    overflow: 'hidden',
+                  }"
+                >
+                  <!-- 
+                    edit icon shown when User clicked on 'Edit' button
+                  -->
+                  @if (showEdit) {
+                    <img
+                      aria-label="edit this group"
+                      [style.backgroundColor]="'red'"
+                      alt=""
+                      src="../../../../assets/icons/do_not_disturb_on_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                    />
+                  }
+                  <!--                       
+                    Hidden when User swiped/dragged left OR when edit icon is shown
+                    Shown when User swiped/dragged right. 
+                  -->
+                  @if (!showEdit && hiddenStartWidth) {
+                    <img
+                      aria-label="send an email"
+                      [style.backgroundColor]="'blue'"
+                      alt=""
+                      src="../../../../assets/icons/mail_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                    />
+                    <img
+                      aria-label="send a text message"
+                      [style.backgroundColor]="'green'"
+                      alt=""
+                      src="../../../../assets/icons/chat_bubble_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                    />
+                  }
+                </span>
+
+                <!-- 
+                  Prefix icon by default is shown.
+                  Hidden when User swiped/dragged left.
+                  Shown when User swiped/dragged right.
+                -->
+                @let showPrefixIconAndText = !showEnd[key];
+                @if (j === 0) {
+                  <img
+                    start1
+                    alt=""
+                    src="../../../../assets/icons/groups_24dp_2854C5_FILL0_wght400_GRAD0_opsz24.svg"
+                  />
+                } @else {
+                  <img
+                    start1
+                    alt=""
+                    src="../../../../assets/icons/group_24dp_2854C5_FILL0_wght400_GRAD0_opsz24.svg"
+                  />
                 }
 
-                @if (dragged[$index] > 0) {
-                  <span>Mail</span>
-                  <span>Message</span>
-                  <span>icon</span>
-                  {{ group.name }} {{ dragged[$index] }}
+                <!-- 
+                  Text by default is shown.
+                  Hidden when User swiped/dragged left.
+                  Shown when User swipped/dragged right.
+                -->
+                @if (showEdit && j > 0) {
+                  <input start2 class="text" value="{{ button.name }}" />
+                } @else {
+                  <span start2 class="text">{{ button.name }}</span>
                 }
-              </button>
 
-              @if (dragged[$index] < 0) {
-                <span>{{ group.count }}</span>
-                <span>></span>
-                <span>Edit</span>
-                <span>Trash</span>
-              }
+                <span end1 class="darkgray count">{{ button.count }}</span>
+                <img
+                  end2
+                  alt=""
+                  src="../../../../assets/icons/arrow_forward_ios_24dp_666666_FILL0_wght400_GRAD0_opsz24.svg"
+                />
+
+                @let hiddenEndWidth = j > 0 && showEnd[key] ? showEnd[key] : 0;
+                <span
+                  hiddenEnd
+                  [ngStyle]="{
+                    width: showEdit ? '0px' : hiddenEndWidth + 'px',
+                    display: 'flex',
+                    overflow: 'hidden',
+                    maxWidth: '20%',
+                  }"
+                >
+                  @if (!showEdit && hiddenEndWidth) {
+                    <img
+                      [style.backgroundColor]="'grey'"
+                      alt=""
+                      src="../../../../assets/icons/edit_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                    />
+                    <img
+                      [style.backgroundColor]="'red'"
+                      alt=""
+                      src="../../../../assets/icons/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                    />
+                  }
+                </span>
+              </app-ios-button>
             </li>
-
-            @if (list.children && $index < list.children.length - 1) {
-              <mat-divider></mat-divider>
-            }
           }
         </ul>
       }
     </li>
   }
 </ul>
+
+<!-- 
+                  [style.width]="
+                    showEdit ? 'fit-content' : hiddenStartWidth + 'px'
+                  "
+                  [style.display]="'flex'"
+                  [style.overflow]="'hidden'"
+
+-->

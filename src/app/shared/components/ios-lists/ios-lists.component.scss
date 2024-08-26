@@ -1,15 +1,29 @@
-button {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 0;
-}
-
 ul,
 li {
   width: 100%;
+}
+
+img {
+  padding: 0.8rem 0.4rem;
+}
+
+input {
+  border: none;
+}
+
+app-ios-button {
+  width: 100%;
+}
+
+.list-title {
+  padding-bottom: 1rem;
+}
+
+.card {
+  border: 1px solid whitesmoke;
+  border-radius: 0.5rem;
+  background-color: white;
+  overflow: hidden;
 }
 
 .icon-start {
@@ -21,17 +35,10 @@ li {
 }
 
 .icon-start,
-.icon-end,
-.count {
+.icon-end {
   flex-basis: 1;
 }
 
 .text {
   flex-grow: 4;
-}
-
-ul.card {
-  border: 1px solid whitesmoke;
-  border-radius: 0.5rem;
-  background-color: white;
 }
