@@ -1,0 +1,19 @@
+<section>
+  <div>
+    <img
+      alt=""
+      src="../../../../assets/icons/search_24dp_999999_FILL0_wght400_GRAD0_opsz24.svg"
+    />
+    <input
+      aria-label="search"
+      [(ngModel)]="value"
+      [id]="id"
+      (keyup)="textInput.emit({ id: id(), value })"
+    />
+    <img
+      alt=""
+      src="../../../../assets/icons/mic_24dp_999999_FILL0_wght400_GRAD0_opsz24.svg"
+    />
+  </div>
+  <button (click)="onCancel()">Cancel</button>
+</section>
