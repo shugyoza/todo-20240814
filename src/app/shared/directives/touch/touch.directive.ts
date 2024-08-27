@@ -1,4 +1,10 @@
-import { Directive, HostListener, input, output } from '@angular/core';
+import {
+  Directive,
+  HostListener,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Directive({
   standalone: true,
@@ -12,11 +18,11 @@ export class TouchDirective {
   */
 
   // provides argument what 'swipe' direction to detect: just x? just y? or both x and y.
-  public readonly appTouch = input<'horizontal' | 'vertical' | 'both'>();
+  @Input() appTouch: 'horizontal' | 'vertical' | 'both' = 'both';
 
-  public readonly index = input<number>(-1);
+  @Input() index = -1;
 
-  public readonly appTouchEvent = output<Record<string, number>>();
+  @Output() appTouchEvent = new EventEmitter<Record<string, number>>();
 
   public touchStart: Record<string, number> | null = null;
 
@@ -34,8 +40,6 @@ export class TouchDirective {
 
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
-    if (!this.appTouch()) return;
-
     this.touchStart = {
       clientX: event.changedTouches[0].clientX,
       clientY: event.changedTouches[0].clientY,
@@ -45,14 +49,12 @@ export class TouchDirective {
 
   @HostListener('touchmove', ['$event'])
   onTouchMove(event: TouchEvent): TouchEvent | undefined {
-    if (!this.appTouch()) return;
-
     return event;
   }
 
   @HostListener('touchend', ['$event'])
   onTouchEnd(event: TouchEvent): void {
-    if (!this.appTouch() || !this.touchStart) return;
+    if (!this.touchStart) return;
 
     this.touchEnd = {
       clientX: event.changedTouches[0].clientX,
@@ -66,14 +68,12 @@ export class TouchDirective {
       timeStamp: this.touchEnd['timeStamp'] - this.touchStart['timeStamp'],
     };
 
-    this.appTouchEvent.emit({ ...this.diffs, index: this.index() });
+    this.appTouchEvent.emit({ ...this.diffs, index: this.index });
     this.reset();
   }
 
   @HostListener('touchcancel', ['$event'])
   onTouchCancel(event: TouchEvent): TouchEvent | undefined {
-    if (!this.appTouch()) return;
-
     return event;
   }
 
