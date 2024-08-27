@@ -7,10 +7,17 @@ export const appRoutes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'contact',
+    path: 'contacts',
     loadComponent: () =>
       import('./features/contacts/contacts.component').then(
         (m) => m.ContactsComponent
+      ),
+  },
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('./shared/components/text-field/text-field.component').then(
+        (m) => m.TextFieldComponent
       ),
   },
 ];
