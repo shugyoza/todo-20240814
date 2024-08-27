@@ -1,0 +1,22 @@
+button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.start1,
+.end2,
+.end1 {
+  flex-basis: 1;
+}
+
+.start2 {
+  flex-grow: 4;
+}
+
+.card {
+  border: 1px solid whitesmoke;
+  border-radius: 0.5rem;
+  background-color: white;
+}

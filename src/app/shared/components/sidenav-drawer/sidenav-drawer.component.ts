@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   inject,
+  Input,
   input,
   ViewChild,
 } from '@angular/core';
@@ -16,6 +17,7 @@ import { SidenavDrawerService } from './sidenav-drawer.service';
   standalone: true,
   selector: 'app-sidenav-drawer',
   templateUrl: 'sidenav-drawer.component.html',
+  styleUrl: 'sidenav-drawer.component.scss',
   imports: [MatSidenavModule],
 })
 export class SidenavDrawerComponent implements AfterViewInit {
@@ -25,22 +27,25 @@ export class SidenavDrawerComponent implements AfterViewInit {
 
   private _sidenavDrawerService = inject(SidenavDrawerService);
 
-  public mode = input<MatDrawerMode>('side');
+  public readonly mode = input<MatDrawerMode>('side');
 
-  public positionStart = input<boolean>(false);
+  public readonly positionStart = input<boolean>(false);
 
-  public positionEnd = input<boolean>(false);
+  public readonly positionEnd = input<boolean>(false);
 
-  public drawerWidthStart = input<string>(''); // e.g: '888px', '8rem', '8em', '80%'
+  public readonly fixedInViewportStart = input<boolean>(false);
 
-  public drawerWidthEnd = input<string>('');
+  public readonly fixedInViewportEnd = input<boolean>(false);
 
-  public hasBackdrop = input<boolean>(false);
+  public readonly hasBackdrop = input<boolean>(false);
 
-  public opened = input<Record<'start' | 'end', boolean>>({
-    start: false,
-    end: false,
-  });
+  @Input() drawerWidthStart = ''; // e.g: '888px', '8rem', '8em', '80%'
+
+  @Input() drawerWidthEnd = '';
+
+  @Input() openedStart = false;
+
+  @Input() openedEnd = false;
 
   ngAfterViewInit(): void {
     if (this.positionStart()) {

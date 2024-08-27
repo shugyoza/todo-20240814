@@ -20,8 +20,13 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
-      "@core/*": ["src/app/core/*"]
+      "@core/*": ["src/app/core/*"],
+      "@icons/*": ["src/assets/icons/*"],
+      "@constants/*": ["src/app/constants/*"],
+      "@shared/*": ["src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {

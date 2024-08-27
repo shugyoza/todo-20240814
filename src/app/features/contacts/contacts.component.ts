@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { MatDividerModule } from '@angular/material/divider';
 import { IosHeaderComponent } from 'src/app/shared/components/ios-header/ios-header.component';
 import { IosListsComponent } from 'src/app/shared/components/ios-lists/ios-lists.component';
 import { IosList } from 'src/app/shared/components/ios-lists/ios-lists.interface';
@@ -17,8 +20,6 @@ import { SidenavDrawerService } from 'src/app/shared/components/sidenav-drawer/s
   templateUrl: 'contacts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatIconModule,
-    MatDividerModule,
     MatSidenavModule,
     JsonPipe,
     IosHeaderComponent,
@@ -31,13 +32,15 @@ export class ContactsComponent {
 
   public lists: IosList[] = lists;
 
+  public edit = signal<boolean>(false);
+
   public openSidenav(event: unknown, position: 'start' | 'end') {
     switch (position) {
       case 'start':
-        console.log(event); // TODO: add logic to pass data to the next screen
+        // TODO: add logic to pass data to the next screen
         return this._sidenavDrawerService.toggle('start');
       default:
-        console.log(event); // TODO: add logic to pass data to the next screen
+        // TODO: add logic to pass data to the next screen
         return this._sidenavDrawerService.toggle('end');
     }
   }

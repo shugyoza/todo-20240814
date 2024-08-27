@@ -4,14 +4,15 @@ import {
   Input,
   output,
   signal,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { CdkDrag } from '@angular/cdk/drag-drop';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgStyle } from '@angular/common';
 
-import { MatDividerModule } from '@angular/material/divider';
 import { IosList } from './ios-lists.interface';
 import { SidenavDrawerComponent } from '../sidenav-drawer/sidenav-drawer.component';
+import { IosButtonComponent } from '../ios-button/ios-button.component';
+import { TouchDirective } from '@shared/directives/touch/touch.directive';
 
 @Component({
   standalone: true,
@@ -20,23 +21,36 @@ import { SidenavDrawerComponent } from '../sidenav-drawer/sidenav-drawer.compone
   styleUrl: 'ios-lists.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatIconModule,
-    MatDividerModule,
     SidenavDrawerComponent,
+    IosButtonComponent,
+    NgStyle,
     JsonPipe,
-    CdkDrag,
+    TouchDirective,
   ],
 })
-export class IosListsComponent {
-  @Input() lists: IosList[] = [];
+export class IosListsComponent implements OnChanges {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() lists: any[] = [];
 
-  readonly sidenavOpenState = output<unknown>();
+  @Input() edit = false;
 
-  readonly panelOpenState = signal(false);
+  public readonly sidenavOpenState = output<unknown>();
 
-  public dragged: Record<string, number> = {};
+  public readonly panelOpenState = signal(false);
 
-  public dragDistance = 100;
+  public showStart: Record<string, number> = {};
+
+  public showEnd: Record<string, number> = {};
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      'edit' in changes &&
+      changes['edit'].previousValue === false &&
+      changes['edit'].currentValue === true
+    ) {
+      this.reset();
+    }
+  }
 
   public toggleExpand(card: IosList): void {
     if (!card.expandable) return;
@@ -44,32 +58,55 @@ export class IosListsComponent {
     card.expanded = !card.expanded;
   }
 
-  public onDrag(event: unknown, index: number) {
-    console.log(event, index);
+  public onClick(event: MouseEvent): void {
+    const clear =
+      !Object.keys(this.showStart).length &&
+      !Object.keys(this.showEnd).length &&
+      !this.edit;
 
-    /* TODO: revisit for swipe event. Current problem: cannot limit the swiped element display
-      const distance = Math.abs(event.distance.x);
-      if (distance > this.dragDistance) return;
+    if (clear) {
+      this.sidenavOpenState.emit({ ...event });
 
-      if (!this.dragged[index]) this.dragged[index] = 0;
-      console.log({ line: 63, event, dragged: this.dragged });
+      return;
+    }
 
-      this.dragged[index] += event.delta.x;
-      // console.log(event.event.target.offsetWidth);
+    this.reset();
+  }
 
-      if (this.dragged[index] < 0) {
-        this.dragged[index] = -1;
-        // console.log({ line: 52, event, dragged: this.dragged });
+  public onTouch(event: Record<string, number>, key: string, index: number) {
+    if (index === 0) return;
 
-        return;
-      }
+    const isClick = event['timeStamp'] <= 200;
+    const isHorizontal =
+      Math.abs(event['clientY']) < Math.abs(event['clientX']);
 
-      if (this.dragged[index] > 0) {
-        this.dragged[index] = 1;
-        // console.log({ line: 58, event, dragged: this.dragged });
+    if (isClick || !isHorizontal) return;
 
-        return;
-      }
-      */
+    const value = Math.abs(event['clientX']);
+
+    const dragLeft = event['clientX'] < 0;
+    if (dragLeft) {
+      // reset showStart instead of deleting key to delete any hiddenStart span on other rows
+      this.showStart = {};
+      // other rows got reset, only this row show the hidden option
+      this.showEnd = { [key]: value };
+
+      return;
+    }
+
+    const dragRight = event['clientX'] > 0;
+    if (dragRight) {
+      // reset showEnd instead of deleting key to delete any hiddenEnd span on other rows
+      this.showEnd = {};
+      // other rows got reset, only this row show the hidden option
+      this.showStart = { [key]: value };
+
+      return;
+    }
+  }
+
+  private reset(): void {
+    this.showStart = {};
+    this.showEnd = {};
   }
 }
