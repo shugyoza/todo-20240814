@@ -1,16 +1,16 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
-@use './m3-theme.scss' as m3;
+// @use 'sass:map';
+// @use '@angular/material' as mat;
+// @use './m3-theme.scss' as m3;
 
-$my-typography-level: mat.m2-define-typography-level(
-  $font-weight: 400,
-  $font-size: var(--ep-small-text),
-  $line-height: 1,
-  $letter-spacing: 0,
-);
+// $my-typography-level: mat.m2-define-typography-level(
+//   $font-weight: 400,
+//   $font-size: var(--ep-small-text),
+//   $line-height: 1,
+//   $letter-spacing: 0,
+// );
 
-.my-theme {
-  // $my-primary: mat.m2-define-palette($theme-primary, 500, 200, 900);
-  // $my-accent: mat.m2-define-palette($theme-accent, 500, 200, 800);
-  // $my-warn: mat.m2-define-palette(mat.$m3-red-palette);
-}
+// .my-theme {
+//   // $my-primary: mat.m2-define-palette($theme-primary, 500, 200, 900);
+//   // $my-accent: mat.m2-define-palette($theme-accent, 500, 200, 800);
+//   // $my-warn: mat.m2-define-palette(mat.$m3-red-palette);
+// }

@@ -1,0 +1,107 @@
+<mat-stepper [linear]="isLinear" #stepper>
+  @for (step of steps; track $index) {
+    <mat-step [stepControl]="step.control">
+      <ng-template matStepLabel>
+        {{ step.label }}
+      </ng-template>
+      <ng-template matStepContent>
+        @if ($index === 0) {
+          <h2>Select Floor Plan</h2>
+
+          <h3>
+            Rental Criteria (Full screening policy available upon request.)
+          </h3>
+
+          <article>
+            <h4>Income:</h4>
+            <p>
+              Gross Monthly Income (Before Taxes) of all Applicants must equal
+              at least 3x Monthly Rent. (Example:$1,500/Monthly Rent = $4,500
+              Monthly Gross Pay).
+            </p>
+            <p>
+              If Applicant’s Gross Income does not meet the minimum 3x Monthly
+              Rent, a Guarantor/Co-Signer will be required. The Gross Monthly
+              Income of Guarantor must equal at least 5x Monthly Rent. (Example:
+              $1,500/Monthly Rent = $7,500 Monthly Gross Pay)
+            </p>
+
+            <h4>Employment:</h4>
+            <p>
+              Each applicant must provide written proof of income within 72
+              hours of completing an application.
+            </p>
+
+            <h4>Credit:</h4>
+            <p>
+              Flexible depending on other criteria. No rental debts or
+              outstanding balances to current or prior rentals. No evictions.
+              Applicants who fail to meet all but one necessary qualification
+              may be required to pay a Conditional/Risk Fee and/or obtain a
+              Guarantor. Any additional Deposits or Fees required must be paid
+              within 72 hours of receiving the Conditional screening result.
+            </p>
+          </article>
+
+          <h3>Community Costs</h3>
+
+          <article>
+            <h4>Leasing Fees:</h4>
+            <p>
+              Application Fee - $75 per applicant (non-refundable), Service Fee
+              - $400 (refundable up to 72 hours).
+            </p>
+
+            <h4>Deposits:</h4>
+            <p>No Deposit Required. Conditional Fee: $500.</p>
+
+            <h4>Amenity Fees:</h4>
+            <p>$7 per month (Includes Trash and Pest Control).</p>
+
+            <h4>Rentable Options:</h4>
+            <p>Garage Parking – $125 Monthly (Per Car).</p>
+
+            <h4>Pet Fees:</h4>
+            <p>
+              $400 Non-Refundable Fee per pet. Monthly Pet Rent - $25 per pet.
+              Max 1 pet per apartment. No Aggressive breeds are allowed.
+            </p>
+            <p>
+              In accordance with Federal Housing Administration laws, service
+              and emotional support animals are not subject to breed
+              restrictions, pet rent, pet fees, or pet deposits. All fees are
+              subject to change at any time without notice, based on current
+              market conditions.
+            </p>
+          </article>
+        }
+      </ng-template>
+
+      @if ($index > 0) {
+        <button mat-button matStepperPrevious>Back</button>
+      }
+
+      @if ($index < steps.length - 1) {
+        <button mat-button matStepperNext>Next</button>
+      }
+
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </mat-step>
+  }
+</mat-stepper>
+
+@let layout = context | layout | async;
+@let width = layout === 'XSmall' ? '100%' : layout === 'Small' ? '50%' : '50%';
+<mat-form-field class="example-full-width" [style.width]="width">
+  <mat-label>Desired Move-In Date</mat-label>
+  <input
+    matInput
+    [min]="minDate"
+    [max]="maxDate"
+    [matDatepicker]="picker"
+    value
+  />
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

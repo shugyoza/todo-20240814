@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div>
     <img
       alt=""
@@ -7,7 +7,7 @@
     <input
       aria-label="search"
       [(ngModel)]="value"
-      [id]="id"
+      [id]="id()"
       (keyup)="textInput.emit({ id: id(), value })"
     />
     <img
@@ -16,4 +16,37 @@
     />
   </div>
   <button (click)="onCancel()">Cancel</button>
-</section>
+</section> -->
+
+<ul>
+  @for (item of list; track $index) {
+    <li [style.border-bottom]="'1px solid silver'">
+      {{ item.name }}
+    </li>
+  }
+</ul>
+
+<!-- 
+
+      <app-ios-button
+        (click)="onClick($event)"
+        appTouch="horizontal"
+        (appTouchEvent)="onTouch($event, 'key', $index)"
+      >
+
+      <span start2 class="text">{{ item.name }}</span>
+
+        <button
+          hiddenEnd
+          [ngStyle]="{
+            width: '3em',
+            display: 'flex',
+            overflow: 'hidden',
+            maxWidth: '20%',
+          }"
+        >
+          Remove
+        </button>
+      </app-ios-button>
+
+-->

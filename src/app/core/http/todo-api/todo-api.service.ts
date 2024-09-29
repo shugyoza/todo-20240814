@@ -23,15 +23,17 @@ export class TodoApiService {
     return this._httpClient.post<unknown>(url, body, options);
   }
 
-  public read(
+  public read<T>(
     url = this._url.root + this._url.path.mock,
     options = {
       headers: {
+        // 'x-api-key': 'blah',
         'Content-Type': 'application/json',
       },
     }
-  ): Observable<unknown> {
-    return this._httpClient.get<unknown>(url, options);
+  ): Observable<T> {
+    console.log({ url });
+    return this._httpClient.get<T>(url, options);
   }
 
   public update = {
