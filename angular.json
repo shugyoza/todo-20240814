@@ -136,11 +136,7 @@
               "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles/m3-theme.scss",
               "src/styles/light-theme.scss",
-              "src/styles/styles.scss",
-              {
-                "inject": false,
-                "input": "src/styles/light-theme.scss"
-              }
+              "src/styles/styles.scss"
             ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
