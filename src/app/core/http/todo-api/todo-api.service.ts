@@ -27,7 +27,7 @@ export class TodoApiService {
     url = this._url.root + this._url.path.mock,
     options = {
       headers: {
-        // 'x-api-key': 'blah',
+        'x-api-key': 'blah',
         'Content-Type': 'application/json',
       },
     }
