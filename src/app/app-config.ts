@@ -12,6 +12,7 @@ import {
   withRouterConfig,
 } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { DocumentService } from '@core/services/document/document.service';
 
 const ngModuleBaseLibraries: ImportProvidersSource = [
   /* e.g
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(...ngModuleBaseLibraries),
     provideHttpClient(),
     provideAnimationsAsync(),
+    DocumentService,
   ],
 };
